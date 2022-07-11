@@ -33,7 +33,7 @@ def starting_state():
             "Event Type": "Arrival",
             "Event Time": 0,
             "Customer": "C1",
-            "Customer Type": "Normal",
+            "Customer Type": "Regular",
             "served_by": None,
         }
     )
