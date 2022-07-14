@@ -70,10 +70,15 @@ def simulation(simulation_time):
         / data["Cumulative Stats"]["Service Starters"]
     )
     rho = (
-        data["Cumulative Stats"]["First Server Busy Time"]
-        + (data["Cumulative Stats"]["Second Server Busy Time"])
+        (
+            data["Cumulative Stats"]["First Expert Server Busy Time"]
+            + data["Cumulative Stats"]["Second Expert Server Busy Time"]
+            + data["Cumulative Stats"]["First Amateur Server Busy Time"]
+            + data["Cumulative Stats"]["Second Amateur Server Busy Time"]
+            + data["Cumulative Stats"]["Third Amateur Server Busy Time"]
+        )
         / simulation_time
-        * 2
+        * 5
     )
 
     print(f"Lq = {Lq}")

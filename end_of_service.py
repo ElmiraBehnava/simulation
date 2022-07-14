@@ -2,22 +2,46 @@ from fel_maker import fel_maker
 
 
 def end_of_service(future_event_list, state, clock, data, customer, served_by):
-    if served_by == "First Server":
-        data["Cumulative Stats"]["First Server Busy Time"] += (
+    if served_by == "First Amateur Server":
+        data["Cumulative Stats"]["First Amateur Server Busy Time"] += (
             clock - data["Customers"][customer]["Time Service Begins"]
         )
         data["Customers"].pop(customer, None)  # remove customer from data
 
-    if served_by == "Second Server":
-        data["Cumulative Stats"]["Second Server Busy Time"] += (
+    elif served_by == "Second Amateur Server":
+        data["Cumulative Stats"]["Second Amateur Server Busy Time"] += (
+            clock - data["Customers"][customer]["Time Service Begins"]
+        )
+        data["Customers"].pop(customer, None)  # remove customer from data
+
+    elif served_by == "Third Amateur Server":
+        data["Cumulative Stats"]["Third Amateur Server Busy Time"] += (
+            clock - data["Customers"][customer]["Time Service Begins"]
+        )
+        data["Customers"].pop(customer, None)  # remove customer from data
+
+    elif served_by == "First Expert Server":
+        data["Cumulative Stats"]["First Expert Server Busy Time"] += (
+            clock - data["Customers"][customer]["Time Service Begins"]
+        )
+        data["Customers"].pop(customer, None)  # remove customer from data
+
+    elif served_by == "Second Expert Server":
+        data["Cumulative Stats"]["Second Expert Server Busy Time"] += (
             clock - data["Customers"][customer]["Time Service Begins"]
         )
         data["Customers"].pop(customer, None)  # remove customer from data
 
     if state["Queue Length"] == 0:
-        state["First Server Status"], state["Second Server Status"] = 0, 0
-    else:
+        state["First Expert Server Status"] = state[
+            "Second Expert Server Status"
+        ] = state["First Amateur Server Status"] = state[
+            "Second Amateur Server Status"
+        ] = state[
+            "Third Amateur Server Status"
+        ] = 0
 
+    else:
         first_customer_in_queue = min(
             data["Queue Customers"], key=data["Queue Customers"].get
         )
