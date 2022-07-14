@@ -74,6 +74,48 @@ def arrival(future_event_list, state, clock, data, customer, customer_type):
             and customer_type == "Regular"
         ):
             add_customer_to_queue(data, state, clock, customer)
+
+        elif (
+            all(
+                [
+                    state["First Amateur Server Status"],
+                    state["Second Amateur Server Status"],
+                    state["Third Amateur Server Status"],
+                ]
+            )
+            and state["First Expert Server Status"] == 0
+            and customer_type == "Regular"
+        ):
+            state["First Expert Server Status"] = 1
+            update_server_status(
+                future_event_list,
+                clock,
+                data,
+                customer,
+                customer_type,
+                "First Expert Server Status",
+            )
+        elif (
+            all(
+                [
+                    state["First Amateur Server Status"],
+                    state["Second Amateur Server Status"],
+                    state["Third Amateur Server Status"],
+                ]
+            )
+            and state["Second Expert Server Status"] == 0
+            and customer_type == "Regular"
+        ):
+            state["Second Expert Server Status"] = 1
+            update_server_status(
+                future_event_list,
+                clock,
+                data,
+                customer,
+                customer_type,
+                "Second Expert Server Status",
+            )
+
     if customer_type == "Expert":
         if state["First Expert Server Status"] == 0:
             state["First Expert Server Status"] = 1
