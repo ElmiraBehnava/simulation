@@ -1,7 +1,9 @@
 def starting_state():
 
     state = dict()
-    state["Queue Length"] = 0
+    state["VIP Queue Length"] = 0
+    state["Regular Queue Length"] = 0
+    state["Recall Queue Length"] = 0
 
     state["First Expert Server Status"] = 0  # expert
     state["Second Expert Server Status"] = 0  # expert
@@ -12,8 +14,13 @@ def starting_state():
     # Data: will save everything
     data = dict()
     data["Customers"] = dict()
-    data["Last Time Queue Length Changed"] = 0
-    data["Queue Customers"] = dict()
+    data["Last Time Regular Queue Length Changed"] = 0
+    data["Last Time VIP Queue Length Changed"] = 0
+
+    # data["Queue Customers"] = dict()
+    data["Regular Queue Customers"] = dict()
+    data["VIP Queue Customers"] = dict()
+    data["Recall Queue Customers"] = dict()
 
     # Cumulative Stats
     data["Cumulative Stats"] = dict()
@@ -22,8 +29,13 @@ def starting_state():
     data["Cumulative Stats"]["First Amateur Server Busy Time"] = 0
     data["Cumulative Stats"]["Second Amateur Server Busy Time"] = 0
     data["Cumulative Stats"]["Third Amateur Server Busy Time"] = 0
-    data["Cumulative Stats"]["Queue Waiting Time"] = 0
+    data["Cumulative Stats"]["Regular Queue Waiting Time"] = 0
+    data["Cumulative Stats"]["VIP Queue Waiting Time"] = 0
+
     data["Cumulative Stats"]["Area Under Queue Length Curve"] = 0
+    data["Cumulative Stats"]["Area Under VIP Queue Length Curve"] = 0
+    data["Cumulative Stats"]["Area Under Regular Queue Length Curve"] = 0
+
     data["Cumulative Stats"]["Service Starters"] = 0
 
     # Starting FEL

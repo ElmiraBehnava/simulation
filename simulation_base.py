@@ -62,24 +62,24 @@ def simulation(simulation_time):
 
     create_excel(table, excel_main_header)
     Lq = (
-        data["Cumulative Stats"]["Area Under Queue Length Curve"]
-        / simulation_time
-    )
-    Wq = (
-        data["Cumulative Stats"]["Queue Waiting Time"]
-        / data["Cumulative Stats"]["Service Starters"]
-    )
-    rho = (
         (
-            data["Cumulative Stats"]["First Expert Server Busy Time"]
-            + data["Cumulative Stats"]["Second Expert Server Busy Time"]
-            + data["Cumulative Stats"]["First Amateur Server Busy Time"]
-            + data["Cumulative Stats"]["Second Amateur Server Busy Time"]
-            + data["Cumulative Stats"]["Third Amateur Server Busy Time"]
+            data["Cumulative Stats"]["Area Under VIP Queue Length Curve"]
+            + data["Cumulative Stats"]["Area Under Regular Queue Length Curve"]
         )
         / simulation_time
         * 5
     )
+    Wq = (
+        data["Cumulative Stats"]["Regular Queue Waiting Time"]
+        + data["Cumulative Stats"]["VIP Queue Waiting Time"]
+    ) / data["Cumulative Stats"]["Service Starters"]
+    rho = (
+        data["Cumulative Stats"]["First Expert Server Busy Time"]
+        + data["Cumulative Stats"]["Second Expert Server Busy Time"]
+        + data["Cumulative Stats"]["First Amateur Server Busy Time"]
+        + data["Cumulative Stats"]["Second Amateur Server Busy Time"]
+        + data["Cumulative Stats"]["Third Amateur Server Busy Time"]
+    ) / (simulation_time * 5)
 
     print(f"Lq = {Lq}")
     print(f"Wq = {Wq}")
